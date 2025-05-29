@@ -29,21 +29,95 @@ Berdasarkan latar belakang di atas, pernyataan masalah yang dimiliki yaitu:
 ### Goals
 
 Berdasarkan pernyataan masalah yang telah dibuat, tujuannya yaitu:
-- Membuat model untuk memberikan rekomendasi film dengan memanfaatkan deep learning
-- Meodel yang telah dibuat dapat memberikan rekomendasi film secara nyata kepada pengguna
+- Membuat model untuk memberikan rekomendasi film dengan memanfaatkan deep.
+- Meodel yang telah dibuat dapat memberikan rekomendasi film secara nyata kepada pengguna.
 
 ## Data Understanding
-Paragraf awal bagian ini menjelaskan informasi mengenai data yang Anda gunakan dalam proyek. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
 
-Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
+Data yang digunakan pada proyek ini diunduh dari Kaggle, dengan alamat URL yaitu https://www.kaggle.com/datasets/parasharmanas/movie-recommendation-system. Dataset ini berasal dari MovieLens, sebuah dataset yang banyak digunakan di bidang sistem rekomendasi, yang berisi tentang peringkat film dan metadata. Dataset ini terdiri atas dua file csv yaitu movies.csv dan ratings.csv dengan total ukuran file sekitar 681 MB. File movies.csv memiliki 62,423 baris dan 3 kolom sementara ratings.csv memiliki 25,000,095 baris dan 4 kolom. Selain itu, didapati juga bahwa data pada dataset sudah bersih karena tidak mengandung nilai null dan nilai duplikat. Adapun movies.csv memiliki kolom sebagai berikut:
+- movieId -> No id unik untuk setiap film. Bertipe integer
+- title -> Judul film. Bertipe object
+- genres -> Genre film (bisa lebih dari 1). Bertipe object
 
-### Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
-- accepts : merupakan jenis pembayaran yang diterima pada restoran tertentu.
-- cuisine : merupakan jenis masakan yang disajikan pada restoran.
-- dst
+Sementara itu kolom pada ratings.csv yaitu sebagai berikut:
+- userId -> No id unik untuk setiap konsumen. Bertipe integer
+- movieId -> No id unik untuk setiap film. Bertipe integer
+- rating -> Rating film. Bertipe float
+- timestamp -> Waktu saat rating diberikan. Bertipe integer
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data atau exploratory data analysis.
+Setelah melalui berbagai tahapan EDA, dihasilkan DataFrame yang merupakan hasil gabungan dari movies dan ratings dengan kolom sebagai berikut:
+- movieId
+- title
+- genres
+- userId
+- rating
+- timestamp
+
+### Variable/feature
+Dari enam kolom yang ada pada DataFrame movie_rating, variabel/fitur yang dipilih yaitu:
+- movieId
+- title
+- genres
+  
+dengan kolom target (label) yaitu **rating**.
+
+### Exploratory Data Analysis
+
+```ruby
+movies.head()
+ratings.head()
+movie_rating.head()
+```
+Bertujuan untuk mendapatkan gambaran tentang dataset dengan menampilkan lima baris teratas pada masing-masing DataFrame.
+
+```ruby
+print('Jumlah data film yang tersedia dalam dataset adalah', len(movies.movieId.unique()))
+print('Jumlah data kombinasi genres yang tersedia dalam dataset adalah', len(movies.genres.unique()))
+print('Jumlah data user yang memberikan rating dalam dataset adalah', len(ratings.userId.unique()))
+print('Jumlah data film yang telah diberikan rating dalam dataset adalah', len(ratings.movieId.unique()))
+print('Jumlah pilihan rating yang dapat diberikan adalah', len(ratings.rating.unique()))
+```
+Bertujuan untuk mengetahui data-data penting seperti jumlah film, jumlah film yang mendapat rating, jumlah pengguna yang memberi rating, jumlah kombinasi genres, dan jumlah pilihan rating yang dapat diberi pengguna.
+
+```ruby
+movies.info()
+ratings.info()
+```
+Menampilkan informasi dasar tentang dataset seperti jumlah baris dan tipe data pada masing-masing kolom.
+
+```ruby
+movies.isnull().sum()
+ratings.isnull().sum()
+movie_rating.isna().sum()
+```
+Melihat apakah dataset memiliki nilai null. Hasilnya tidak didapati nilai null.
+
+```ruby
+movies_duplicate_count = movies.duplicated().sum()
+ratings_duplicate_count = ratings.duplicated().sum()
+duplicate_count = movie_rating.duplicated().sum()
+```
+Melihat apakah dataset memiliki data duplikat. Hasilnya tidak didapati data duplikat.
+
+```ruby
+ratings_list = sorted(float(r) for r in ratings.rating.unique())
+```
+Menampilkan pilihan rating yang dapat dipilih dan mengurutkannya dari terkecil ke terbesar.
+
+```ruby
+rating_counts = ratings['rating'].value_counts().sort_index()
+```
+Menghitung jumlah user yang memilih rating tersebut
+
+```ruby
+ratings['rating'].describe()
+```
+Melihat distribusi rating seperti nilai median, mean, standar deviasi, Q1, Q3, min, dan max.
+
+### Data Visualization
+![download](https://github.com/user-attachments/assets/862ec7c0-0dae-46e1-8b90-d9f7a0fcfa95)
+
+Diagram batas di atas menunjukkan jumlah user yang memberikan rating tertentu. Terlihat bahwa lebih dari 6,000,000 user memberikan rating 4.0 sehingga rating ini adalah yang paling banyak diberi. Sementara itu, terdapat kurang dari 500,000 user yang memberikan rating 0.5 sehingga rating ini adalah jumlah yang paling sedikit diberi.
 
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
