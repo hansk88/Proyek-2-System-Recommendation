@@ -2,6 +2,8 @@
 
 ## Domain Proyek
 
+### Latar Belakang
+
 Abad 21 menunjukkan perkembangan yang luar biasa, khususnya dalam bidang teknologi. Contoh dari perkembangan teknologi tersebut salah satunya dapat ditemui pada aplikasi streaming film yang dapat diakses melalui HP, tablet, laptop, ataupun TV. Untuk meraih keuntungan yang lebih besar dan memberikan pengalaman terbaik kepada konsumen, banyak dari aplikasi penyedia jasa ini yang menggunakan sebuah fitur yang disebut sistem rekomendasi. Sistem rekomendasi adalah suatu sistem yang merekomendasikan sesuatu terhadap konsumen berdasarkan data perilaku atau preferensi dari waktu ke waktu [1]. Dalam proyek kali ini, akan diteliti lebih lanjut bagaimana sistem rekomendasi bekerja dan cara membuat sistem rekomendasi sederhana untuk merekomendasikan film kepada calon user.
 
 ### Mengapa dan bagaimana masalah tersebut harus diselesaikan
@@ -18,32 +20,17 @@ Meski begitu, untuk merancang sebuah sistem rekomendasi bukanlah hal yang mudah.
 
 ## Business Understanding
 
-Pada bagian ini, kamu perlu menjelaskan proses klarifikasi masalah.
-
-Bagian laporan ini mencakup:
-
 ### Problem Statements
 
-Menjelaskan pernyataan masalah latar belakang:
-- Pernyataan Masalah 1
-- Pernyataan Masalah 2
-- Pernyataan Masalah n
+Berdasarkan latar belakang di atas, pernyataan masalah yang dimiliki yaitu:
+- Bagaimana membangun model sistem rekomendasi film dengan memanfaatkan deep learning?
+- Apakah model yang telah dibangun dapat digunakan untuk merekomendasikan film kepada pengguna?
 
 ### Goals
 
-Menjelaskan tujuan dari pernyataan masalah:
-- Jawaban pernyataan masalah 1
-- Jawaban pernyataan masalah 2
-- Jawaban pernyataan masalah n
-
-Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pernyataan masalah dan juga goals yang diinginkan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Menambahkan bagian “Solution Statement” yang menguraikan cara untuk meraih goals. Bagian ini dibuat dengan ketentuan sebagai berikut: 
-
-    ### Solution statements
-    - Mengajukan 2 atau lebih solution statement. Misalnya, menggunakan dua atau lebih algoritma untuk mencapai solusi yang diinginkan atau melakukan improvement pada baseline model dengan hyperparameter tuning.
-    - Solusi yang diberikan harus dapat terukur dengan metrik evaluasi.
+Berdasarkan pernyataan masalah yang telah dibuat, tujuannya yaitu:
+- Membuat model untuk memberikan rekomendasi film dengan memanfaatkan deep learning
+- Meodel yang telah dibuat dapat memberikan rekomendasi film secara nyata kepada pengguna
 
 ## Data Understanding
 Paragraf awal bagian ini menjelaskan informasi mengenai data yang Anda gunakan dalam proyek. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
