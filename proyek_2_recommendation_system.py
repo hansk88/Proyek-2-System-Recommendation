@@ -197,9 +197,6 @@ num_users = len(user_to_user_encoded)
 # Mendapatkan jumlah movie
 num_movie = len(movie_encoded_to_movie)
 
-# Mengubah rating menjadi nilai float
-df['rating'] = df['rating'].values.astype(np.float32)
-
 # Nilai minimum rating
 min_rating = min(df['rating'])
 
