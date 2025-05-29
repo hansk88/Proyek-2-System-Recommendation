@@ -55,9 +55,8 @@ Setelah melalui berbagai tahapan EDA, dihasilkan DataFrame yang merupakan hasil 
 
 ### Variable/feature
 Dari enam kolom yang ada pada DataFrame movie_rating, variabel/fitur yang dipilih yaitu:
+- userId
 - movieId
-- title
-- genres
   
 dengan kolom target (label) yaitu **rating**.
 
@@ -169,6 +168,71 @@ movie_ids = df['movieId'].unique().tolist()
 ```
 Membuat list untuk masing-masing variabel terpilih dan hanya dapat diisi oleh data unik (tidak ada pengulangan nilai).
 
+```ruby
+user_to_user_encoded = {x: i for i, x in enumerate(user_ids)}
+movie_to_movie_encoded = {x: i for i, x in enumerate(movie_ids)}
+```
+Melakukan encode untuk userId dan movieId untuk mempermudah saat proses training.
+
+```ruby
+user_encoded_to_user = {i: x for i, x in enumerate(user_ids)}
+movie_encoded_to_movie = {i: x for i, x in enumerate(movie_ids)}
+```
+Melakukan inverse encode untuk mengembalikannya ke bentuk semula.
+
+```ruby
+df['user'] = df['userId'].map(user_to_user_encoded)
+df['movie'] = df['movieId'].map(movie_to_movie_encoded)
+```
+Memetakan userId dan movieId ke DataFrame yang berkaitan.
+
+```ruby
+num_users = len(user_to_user_encoded)
+num_movie = len(movie_encoded_to_movie)
+min_rating = min(df['rating'])
+max_rating = max(df['rating'])
+print('Jumlah user: {}, Jumlah film: {}, Min Rating: {}, Max Rating: {}'.format(
+    num_users, num_movie, min_rating, max_rating
+```
+Menampilkan jumlah user yang memberi rating, jumlah film yang mendapat rating, dan rating minimum maupun maksimum yang ada.
+
+```
+movie_id = df['movieId'].tolist()
+movie_title = df['title'].tolist()
+movie_genres = df['genres'].tolist()
+```
+Menyimpan data pada masing-masing kolom dalam bentuk list.
+
+```ruby
+movies = pd.DataFrame({
+    'id': movie_id,
+    'title': movie_title,
+    'genres': movie_genres
+```
+Membuat key dan menyimpan data ke dalam dictionary dari list yang telah dibuat sebelumnya.
+
+```ruby
+movies
+```
+Menampilkan isi dari dictionary yang telah dibuat.
+
+```ruby
+df = df.sample(frac=1, random_state=42)
+```
+Mengacak data untuk menghindari bias saat splitting data.
+
+```ruby
+x = df[['user', 'movie']].values
+y = df['rating'].apply(lambda x: (x - min_rating) / (max_rating - min_rating)).values
+train_indices = int(0.8 * df.shape[0])
+x_train, x_val, y_train, y_val = (
+    x[:train_indices],
+    x[train_indices:],
+    y[:train_indices],
+    y[train_indices:]
+)
+```
+Menyimpan data user dan movie ke dalam x (variabel/fitur) dan rating sebagai y (label). Selanjutnya, data dipisah dengan proporsi 80% untuk data latihan dan 20% untuk data validasi.
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan proses data preparation yang dilakukan
