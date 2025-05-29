@@ -282,14 +282,6 @@ Melatih model dengan data training, batch size 2048 sampel, maksimal 20 epoch, f
 
 ### Result
 
-![Screenshot 2025-05-30 043837](https://github.com/user-attachments/assets/7767d464-c655-4299-a865-c6209ffaf37a)
-
-Setelah 6 epoch, pelatihan dihentikan dan diperoleh training loss 4.48, RMSE training 0.48, validation loss 5.26, dan RMSE validasi 0.42.
-
-![download (1)](https://github.com/user-attachments/assets/44c79afa-1eda-4e29-abdb-c03d81ce9d16)
-
-Jika dilihat, RMSE training > RMSE validasi. Hal ini kemungkinan disebabkan oleh batch size yang terlalu besar dan pelatihan epoch yang terlalu singkat. Meski begitu, RMSE validasi yang diperoleh yaitu 0.42 terbilang cukup baik untuk dataset dengan jumlah data lebih dari 25,000,000.
-
 '''ruby
 user_id = df.userId.sample(1).iloc[0]
 movie_watched_by_user = df[df.userId == user_id]
@@ -348,26 +340,25 @@ for row in recommended_movie.itertuples():
 ```
 Menampilkan 10 rekomendasi dan memastikan tidak ada data duplikat dalam rekomendasi tersebut. Data dalam rekomendasi yang ditampilkan yaitu title dan genres.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
-- Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. **Jelaskan proses improvement yang dilakukan**.
-- Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
+![Screenshot 2025-05-30 043837](https://github.com/user-attachments/assets/07785efd-3e05-4624-8242-c894658b7543)
 
 ## Evaluation
-Pada bagian ini anda perlu menyebutkan metrik evaluasi yang digunakan. Lalu anda perlu menjelaskan hasil proyek berdasarkan metrik evaluasi yang digunakan.
 
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+![Screenshot 2025-05-30 043837](https://github.com/user-attachments/assets/7767d464-c655-4299-a865-c6209ffaf37a)
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+Setelah 6 epoch, pelatihan dihentikan dan diperoleh training loss 4.48, RMSE training 0.48, validation loss 5.26, dan RMSE validasi 0.42.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+![download (1)](https://github.com/user-attachments/assets/44c79afa-1eda-4e29-abdb-c03d81ce9d16)
+
+Jika dilihat, RMSE training > RMSE validasi. Hal ini kemungkinan disebabkan oleh batch size yang terlalu besar dan pelatihan epoch yang terlalu singkat. Meski begitu, RMSE validasi yang diperoleh yaitu 0.42 terbilang cukup baik untuk dataset dengan jumlah data lebih dari 25,000,000.
+
+### Evaluation Metric
+
+Metrik yang digunakan untuk mengevaluasi pelatihan model yaitu Root Mean Squared Error (RMSE). Metrik ini digunakan untuk mengukur seberapa jauh prediksi model dari nilai sebenarnya. Pada dasarnya RMSE dapat dihitung sebagai akar dari Mean Squared Error (MSE), sehingga metrik ini memberikan bobot lebih pada error yang besar karena rumus yang dimilikinya. Semakin kecil nilai RMSE, maka model memiliki akurasi yang lebih tinggi.
+
+![Screenshot 2025-05-30 043837](https://github.com/user-attachments/assets/af0204f2-a9e4-4f09-b1be-8d3c8a1ff2a2)
 
 **---Ini adalah bagian akhir laporan---**
 
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
+
 
