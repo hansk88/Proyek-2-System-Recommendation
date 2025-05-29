@@ -1,14 +1,20 @@
-# Laporan Proyek Machine Learning - Nama Anda
+# Laporan Proyek Machine Learning - Hans Kristiandi
 
 ## Domain Proyek
 
-Pada bagian ini, kamu perlu menuliskan latar belakang yang relevan dengan proyek yang diangkat.
+Abad 21 menunjukkan perkembangan yang luar biasa, khususnya dalam bidang teknologi. Contoh dari perkembangan teknologi tersebut salah satunya dapat ditemui pada aplikasi streaming film yang dapat diakses melalui HP, tablet, laptop, ataupun TV. Untuk meraih keuntungan yang lebih besar dan memberikan pengalaman terbaik kepada konsumen, banyak dari aplikasi penyedia jasa ini yang menggunakan sebuah fitur yang disebut sistem rekomendasi. Sistem rekomendasi adalah suatu sistem yang merekomendasikan sesuatu terhadap konsumen berdasarkan data perilaku atau preferensi dari waktu ke waktu [1]. Dalam proyek kali ini, akan diteliti lebih lanjut bagaimana sistem rekomendasi bekerja dan cara membuat sistem rekomendasi sederhana untuk merekomendasikan film kepada calon user.
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Jelaskan mengapa dan bagaimana masalah tersebut harus diselesaikan
-- Menyertakan hasil riset terkait atau referensi. Referensi yang diberikan harus berasal dari sumber yang kredibel dan author yang jelas.
-- Format Referensi dapat mengacu pada penulisan sitasi [IEEE](https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf), [APA](https://www.mendeley.com/guides/apa-citation-guide/) atau secara umum seperti [di sini](https://penerbitdeepublish.com/menulis-buku-membuat-sitasi-dengan-mudah/)
-- Sumber yang bisa digunakan [Scholar](https://scholar.google.com/)
+### Mengapa dan bagaimana masalah tersebut harus diselesaikan
+
+Sebuah perusahaan memiliki tujuan untuk mendapatkan keuntungan yang sebesar-besarnya dengan memanfaatkan berbagai peluang yang ada. Konsep tersebut juga berlaku untuk aplikasi penyedia jasa streaming film yang tentunya ingin memberikan pelayanan terbaik kepada konsumen agar tetap setia kepada produk yang ditawarkan. Berbagai riset dilakukan dan salah satunya menunjukkan bahwa konsumen Netflix pada umumnya kehilangan minat setelah memilih selama 60-90 detik dan melihat-lihat 10-20 pilihan film [2]. Untuk mengatasi masalah ini, diperlukan solusi yang konkret dimana salah satunya yaitu dengan menggunakan sistem rekomendasi untuk memberikan saran film yang sesuai dengan preferensi setiap konsumen.
+
+Meski begitu, untuk merancang sebuah sistem rekomendasi bukanlah hal yang mudah. Hal ini dikarenakan banyaknya variabel yang harus dipertimbangkan saat ingin membuat sebuah model, seperti judul film, genre, rating pengguna, aktor, dan sebagainya. Beruntungnya, kemajuan dalam ilmu pengetahuan menghasilkan sebuah penemuan yang dinamakan machine learning. Dengan menggunakan konsep seperti deep learning dan matrix factorization, kita dimampukan untuk merancang sebuah sistem rekomendasi yang mempertimbangkan berbagai variabel dalam proses pelatihannya dan tentunya dapat memberikan hasil akhir yang baik.
+
+### Referensi
+
+[1] F. Kane, "Building Recommender Systems with Machine Learning and AI," _O'Reilly Media_, 2018. Tersedia: https://www.oreilly.com/videos/building-recommender-systems/9781789803273/
+
+[2] C. A. Gomez-Uribe dan N. Hunt, "The Netflix recommender system: Algorithms, business value, and innovation," _ACM Transactions on Management Information System_, vol. 6, no. 4, pp. 1-19, 2015. Tersedia: https://dl.acm.org/doi/abs/10.1145/2843948
 
 ## Business Understanding
 
