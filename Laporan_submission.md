@@ -340,7 +340,7 @@ for row in recommended_movie.itertuples():
 ```
 Menampilkan 10 rekomendasi dan memastikan tidak ada data duplikat dalam rekomendasi tersebut. Data dalam rekomendasi yang ditampilkan yaitu title dan genres.
 
-![Screenshot 2025-05-30 043837](https://github.com/user-attachments/assets/07785efd-3e05-4624-8242-c894658b7543)
+![Screenshot 2025-05-30 044718](https://github.com/user-attachments/assets/e0c2bb8a-8f4d-47c9-9409-6b19f19ea358)
 
 ## Evaluation
 
@@ -356,7 +356,8 @@ Jika dilihat, RMSE training > RMSE validasi. Hal ini kemungkinan disebabkan oleh
 
 Metrik yang digunakan untuk mengevaluasi pelatihan model yaitu Root Mean Squared Error (RMSE). Metrik ini digunakan untuk mengukur seberapa jauh prediksi model dari nilai sebenarnya. Pada dasarnya RMSE dapat dihitung sebagai akar dari Mean Squared Error (MSE), sehingga metrik ini memberikan bobot lebih pada error yang besar karena rumus yang dimilikinya. Semakin kecil nilai RMSE, maka model memiliki akurasi yang lebih tinggi.
 
-![Screenshot 2025-05-30 043837](https://github.com/user-attachments/assets/af0204f2-a9e4-4f09-b1be-8d3c8a1ff2a2)
+![download (1)](https://github.com/user-attachments/assets/d5de7b21-e927-4a01-b782-f3e2ebeda287)
+
 
 **---Ini adalah bagian akhir laporan---**
 
