@@ -29,7 +29,7 @@ Berdasarkan latar belakang di atas, pernyataan masalah yang dimiliki yaitu:
 ### Goals
 
 Berdasarkan pernyataan masalah yang telah dibuat, tujuannya yaitu:
-- Membuat model untuk memberikan rekomendasi film dengan memanfaatkan deep.
+- Membuat model untuk memberikan rekomendasi film dengan memanfaatkan deep learning.
 - Meodel yang telah dibuat dapat memberikan rekomendasi film secara nyata kepada pengguna.
 
 ## Data Understanding
