@@ -282,10 +282,10 @@ Melatih model dengan data training, batch size 2048 sampel, maksimal 20 epoch, f
 
 ### Result
 
-'''ruby
+```ruby
 user_id = df.userId.sample(1).iloc[0]
 movie_watched_by_user = df[df.userId == user_id]
-'''
+```
 Mengambil satu user dan mencatat history film yang pernah ditonton.
 
 ```ruby
