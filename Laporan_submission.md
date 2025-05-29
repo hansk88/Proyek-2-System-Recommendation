@@ -117,10 +117,58 @@ Melihat distribusi rating seperti nilai median, mean, standar deviasi, Q1, Q3, m
 ### Data Visualization
 ![download](https://github.com/user-attachments/assets/862ec7c0-0dae-46e1-8b90-d9f7a0fcfa95)
 
-Diagram batas di atas menunjukkan jumlah user yang memberikan rating tertentu. Terlihat bahwa lebih dari 6,000,000 user memberikan rating 4.0 sehingga rating ini adalah yang paling banyak diberi. Sementara itu, terdapat kurang dari 500,000 user yang memberikan rating 0.5 sehingga rating ini adalah jumlah yang paling sedikit diberi.
+Diagram batang di atas menunjukkan jumlah user yang memberikan rating tertentu. Terlihat bahwa lebih dari 6,000,000 user memberikan rating 4.0 sehingga rating ini adalah yang paling banyak diberi. Sementara itu, terdapat kurang dari 500,000 user yang memberikan rating 0.5 sehingga rating ini adalah jumlah yang paling sedikit diberi.
 
 ## Data Preparation
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
+
+Berbagai tahapan yang dilakukan untuk menyiapkan data agar siap dipakai untuk pelatihan model yaitu:
+
+```ruby
+movie_rating = pd.merge(movies, ratings, on='movieId', how='right')
+```
+Menggabungkan DataFrame movies ke ratings berdasarkan kolom movieId untuk menyiapkan DataFrame yang akan digunakan dalam pelatihan model
+
+```ruby
+movie_rating.sort_values('movieId', ascending=True)
+```
+Menyortir DataFrame berdasarkan kolom movieId dari nilai terkecil ke terbesar agar data menjadi rapi
+
+```ruby
+check = movie_rating.groupby('title')[['movieId', 'genres']].nunique()
+non_unique = check[(check['movieId'] > 1) | (check['genres'] > 1)]
+```
+Mengecek apakah sebuah title memiliki tepat satu movieId dan satu genres. Hal ini penting untuk menghindari adanya data duplikat dan miss informasi. Hasilnya didapati ada 89 sampel data yang memiliki lebih dari satu movieId dan genres.
+
+```ruby
+fix = (
+    movie_rating.groupby('title').agg({
+        'movieId': lambda x: x.mode().iloc[0],
+        'genres': lambda x: x.mode().iloc[0]
+    })
+)
+```
+Memilih nilai modus untuk movieId dan genres dari sebuah title yang sama.
+
+```ruby
+movie_rating['movieId'] = movie_rating['title'].map(fix['movieId'])
+movie_rating['genres'] = movie_rating['title'].map(fix['genres'])
+```
+Menyamakan movieId dan genres untuk satu title yang sama dengan menggunakan nilai modus yang telah dicari sebelumnya.
+
+```
+if non_unique.empty:
+    print("Semua title memiliki tepat satu movieId dan satu genres")
+else:
+    print("Ada title yang memiliki lebih dari satu movieId atau lebih dari satu genres")
+```
+Melakukan pengecekan ulang untuk memastikan setiap title memiliki tepat satu movieId dan satu genres.
+
+```ruby
+user_ids = df['userId'].unique().tolist()
+movie_ids = df['movieId'].unique().tolist()
+```
+Membuat list untuk masing-masing variabel terpilih dan hanya dapat diisi oleh data unik (tidak ada pengulangan nilai).
+
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan proses data preparation yang dilakukan
