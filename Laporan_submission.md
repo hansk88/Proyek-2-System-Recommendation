@@ -234,12 +234,119 @@ x_train, x_val, y_train, y_val = (
 ```
 Menyimpan data user dan movie ke dalam x (variabel/fitur) dan rating sebagai y (label). Selanjutnya, data dipisah dengan proporsi 80% untuk data latihan dan 20% untuk data validasi.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
-
 ## Modeling
-Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
+
+### Model Training
+
+Pelatihan model menggunakan pendekatan collaborative filtering dengan tahapan sebagai berikut:
+
+```ruby
+def __init__(self, num_users, num_movie, embedding_size, **kwargs)
+```
+Bertujuan untuk menerima jumlah user dan movie sebagai input dan membangun layer embedding.
+
+```ruby
+def call(self, inputs):
+```
+Bertujuan untuk memproses data masuk.
+
+```ruby
+model = RecommenderNet(num_users, num_movie, 50)
+model.compile(
+    loss = tf.keras.losses.BinaryCrossentropy(),
+    optimizer = keras.optimizers.Adam(learning_rate=0.001),
+    metrics=[tf.keras.metrics.RootMeanSquaredError()]
+)
+```
+Menggunakan arsitektur RecommenderNet dengan embedding size 50, fungsi loss BinaryCrossentropy, optimizer Adam, dan metrik evaluasi berupa RMSE.
+
+```ruby
+early_stop = tf.keras.callbacks.EarlyStopping(
+    monitor='val_loss',
+    patience=5,
+)
+```
+Membuat fungsi callback untuk menghentikan pelatihan jika val_loss tidak membaik selama 5 epoch berturut-turut.
+
+```ruby
+history = model.fit(
+    x = x_train,
+    y = y_train,
+    batch_size = 2048,
+    epochs = 20,
+    validation_data = (x_val, y_val),
+    callbacks=[early_stop]
+)
+```
+Melatih model dengan data training, batch size 2048 sampel, maksimal 20 epoch, fungsi callback, dan divalidasi dengan data validasi.
+
+### Result
+
+![Screenshot 2025-05-30 043837](https://github.com/user-attachments/assets/7767d464-c655-4299-a865-c6209ffaf37a)
+
+Setelah 6 epoch, pelatihan dihentikan dan diperoleh training loss 4.48, RMSE training 0.48, validation loss 5.26, dan RMSE validasi 0.42.
+
+![download (1)](https://github.com/user-attachments/assets/44c79afa-1eda-4e29-abdb-c03d81ce9d16)
+
+Jika dilihat, RMSE training > RMSE validasi. Hal ini kemungkinan disebabkan oleh batch size yang terlalu besar dan pelatihan epoch yang terlalu singkat. Meski begitu, RMSE validasi yang diperoleh yaitu 0.42 terbilang cukup baik untuk dataset dengan jumlah data lebih dari 25,000,000.
+
+'''ruby
+user_id = df.userId.sample(1).iloc[0]
+movie_watched_by_user = df[df.userId == user_id]
+'''
+Mengambil satu user dan mencatat history film yang pernah ditonton.
+
+```ruby
+movie_not_watched = movies[~movies['id'].isin(movie_watched_by_user.movieId.values)]['id']
+```
+Mencatat film yang belum pernah ditonton oleh user tersebut. 
+
+```ruby
+movie_not_watched = [[movie_to_movie_encoded.get(x)] for x in movie_not_watched]
+user_encoder = user_to_user_encoded.get(user_id)
+user_movie_array = np.hstack(
+    ([[user_encoder]] * len(movie_not_watched), movie_not_watched)
+)
+```
+Membuat array untuk menyimpan film yang belum pernah ditonton.
+
+```ruby
+ratings = model.predict(user_movie_array).flatten()
+```
+Memprediksi rating film (yang belum pernah ditonton) yang akan diberikan oleh user.
+
+```ruby
+sorted_indices = ratings.argsort()[::-1]
+```
+Menyortir 10 film dengan rating tertinggi yang diberikan user.
+
+```ruby
+for idx in sorted_indices:
+    movie_id = movie_encoded_to_movie.get(movie_not_watched[idx][0])
+    if movie_id and movie_id not in seen:
+        recommended_movie_ids.append(movie_id)
+        seen.add(movie_id)
+    if len(recommended_movie_ids) == 10:
+        break
+```
+Menyimpan 10 film dengan rating tertinggi yang mungkin akan diberikan user.
+
+```ruby
+top_movie_user = (
+    movie_watched_by_user.sort_values(by='rating', ascending=False)
+    .head(5)
+    .movieId.values
+)
+```
+Menampilkan 5 film dengan rating tertinggi yang pernah diberikan user sebagai data historis.
+
+```ruby
+recommended_movie = movies.drop_duplicates(subset='id')
+recommended_movie = recommended_movie[recommended_movie['id'].isin(recommended_movie_ids)]
+for row in recommended_movie.itertuples():
+    print(row.title, ':', row.genres)
+```
+Menampilkan 10 rekomendasi dan memastikan tidak ada data duplikat dalam rekomendasi tersebut. Data dalam rekomendasi yang ditampilkan yaitu title dan genres.
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
