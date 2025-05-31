@@ -114,7 +114,7 @@ ratings['rating'].describe()
 Melihat distribusi rating seperti nilai median, mean, standar deviasi, Q1, Q3, min, dan max.
 
 ### Data Visualization
-![download](https://github.com/user-attachments/assets/862ec7c0-0dae-46e1-8b90-d9f7a0fcfa95)
+![Preview](image1.png)
 
 Diagram batang di atas menunjukkan jumlah user yang memberikan rating tertentu. Terlihat bahwa lebih dari 6,000,000 user memberikan rating 4.0 sehingga rating ini adalah yang paling banyak diberi. Sementara itu, terdapat kurang dari 500,000 user yang memberikan rating 0.5 sehingga rating ini adalah jumlah yang paling sedikit diberi.
 
@@ -340,15 +340,17 @@ for row in recommended_movie.itertuples():
 ```
 Menampilkan 10 rekomendasi dan memastikan tidak ada data duplikat dalam rekomendasi tersebut. Data dalam rekomendasi yang ditampilkan yaitu title dan genres.
 
-![Screenshot 2025-05-30 044718](https://github.com/user-attachments/assets/e0c2bb8a-8f4d-47c9-9409-6b19f19ea358)
+![Preview](image3.png)
+
+Dari rekomendasi di atas, didapatkan rekomendasi film yang diberikan kepada user memiliki kemiripan genres dengan film yang telah ditonton dan diberikan rating tinggi oleh user. 
 
 ## Evaluation
 
-![Screenshot 2025-05-30 043837](https://github.com/user-attachments/assets/7767d464-c655-4299-a865-c6209ffaf37a)
+![Preview](image2.png)
 
 Setelah 6 epoch, pelatihan dihentikan dan diperoleh training loss 4.48, RMSE training 0.48, validation loss 5.26, dan RMSE validasi 0.42.
 
-![download (1)](https://github.com/user-attachments/assets/44c79afa-1eda-4e29-abdb-c03d81ce9d16)
+![Preview](image4.png)
 
 Jika dilihat, RMSE training > RMSE validasi. Hal ini kemungkinan disebabkan oleh batch size yang terlalu besar dan pelatihan epoch yang terlalu singkat. Meski begitu, RMSE validasi yang diperoleh yaitu 0.42 terbilang cukup baik untuk dataset dengan jumlah data lebih dari 25,000,000.
 
