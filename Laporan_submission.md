@@ -114,7 +114,7 @@ ratings['rating'].describe()
 Melihat distribusi rating seperti nilai median, mean, standar deviasi, Q1, Q3, min, dan max.
 
 ### Data Visualization
-[![Preview](image1.png)](https://github.com/hansk88/Proyek-2-System-Recommendation/blob/main/image1.png)
+![image1.png](https://github.com/hansk88/Proyek-2-System-Recommendation/blob/main/image1.png)
 
 Diagram batang di atas menunjukkan jumlah user yang memberikan rating tertentu. Terlihat bahwa lebih dari 6,000,000 user memberikan rating 4.0 sehingga rating ini adalah yang paling banyak diberi. Sementara itu, terdapat kurang dari 500,000 user yang memberikan rating 0.5 sehingga rating ini adalah jumlah yang paling sedikit diberi.
 
